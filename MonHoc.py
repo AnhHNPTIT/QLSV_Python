@@ -12,3 +12,10 @@ class MonHoc:
 
     def getSoTinChi(self):
         return self._so_tin_chi
+
+    @classmethod
+    def nhap(cls):
+        ma = input("Nhap ma mon hoc: ")
+        ten = input("Nhap ten mon hoc: ")
+        so_tin_chi = input("Nhap so tin chi: ")
+        return MonHoc(ma, ten, so_tin_chi)

@@ -13,10 +13,21 @@ class Nguoi:
 
     def getDiaChi(self):
         return self._dia_chi
+    
+    def getTuoi(self):
+        return self._tuoi
 
-    def nhap(self):
-        print ("nhap")
-        input()
+    def getGioiTinh(self):
+        return self._gioi_tinh
+
+    @classmethod
+    def nhap(cls):
+        print("_________________________")
+        ten = input("Nhap ten: ")
+        gioi_tinh = input("Nhap gioi tinh: ")
+        tuoi = input("Nhap tuoi: ")
+        dia_chi = input("Nhap dia chi: ")
+        return Nguoi(ten, gioi_tinh, tuoi, dia_chi)
 
     def sap_xep(self):
         print ("sap_xep")
