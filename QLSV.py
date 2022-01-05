@@ -1,9 +1,9 @@
-import BangDiem
-import GiaoVien
-import LopHoc
-import MonHoc
+from BangDiem import BangDiem
+from GiaoVien import GiaoVien
+from LopHoc import LopHoc
+from MonHoc import MonHoc
 from Nguoi import Nguoi
-import SinhVien
+from SinhVien import SinhVien
 
 
 class QLSV:
@@ -17,7 +17,34 @@ class QLSV:
         result = None
         if (self.ds_sv.__len__() > 0):
             for sv in self.ds_sv:
-                if (sv._ma_sv == ma_sv):
+                if (sv.getMaSV() == ma_sv):
+                    result = sv
+        return result
+
+    def nhap_sv(self):
+        nguoi = Nguoi.nhap()
+        ma_sv = input("Nhap ma sinh vien: ")
+        lop = input("Nhap lop: ")
+        chuyen_nganh = input("Nhap chufrom BangDiem import BangDiem
+from GiaoVien import GiaoVien
+from LopHoc import LopHoc
+from MonHoc import MonHoc
+from Nguoi import Nguoi
+from SinhVien import SinhVien
+
+
+class QLSV:
+    ds_sv = []
+    ds_gv = []
+    ds_mon = []
+    ds_lop = []
+    bang_diem = []
+
+    def tim_sv(self, ma_sv):
+        result = None
+        if (self.ds_sv.__len__() > 0):
+            for sv in self.ds_sv:
+                if (sv.getMaSV() == ma_sv):
                     result = sv
         return result
 
@@ -46,8 +73,8 @@ class QLSV:
     def tim_mon(self, ma_mon):
         result = None
         if (self.ds_mon.__len__() > 0):
-            for mon in self.ds_sv:
-                if (mon._ma == ma_mon):
+            for mon in self.ds_mon:
+                if (mon.get_ma() == ma_mon):
                     result = mon
         return result
 
@@ -77,8 +104,8 @@ class QLSV:
     def them_diem(self):
         ma_sv = input("Nhap ma sinh vien: ")
         ma_mon_hoc = input("Nhap ma mon hoc: ")
-        sinh_vien = self.find_sv(ma_sv)
-        mon_hoc = self.find_mon(ma_mon_hoc)
+        sinh_vien = self.tim_sv(ma_sv)
+        mon_hoc = self.tim_mon(ma_mon_hoc)
         so_diem = input("Nhap so diem: ")
         diem = BangDiem(sinh_vien, mon_hoc, so_diem)
         self.bang_diem.append(diem)
@@ -86,12 +113,25 @@ class QLSV:
     def sap_xep_tang(self):
         for i in range(self.bang_diem.__len__()):
             for j in range(i + 1, self.bang_diem.__len__()):
-                if (self.bang_diem[i].sinh_vien.getTen > self.bang_diem[j].ten):
-                    self.bang_diem[i], self.bang_diem[j] = self.bang_diem[j], self.bang_diem[i] 
+                if (self.bang_diem[i].get_sinh_vien().getTen() > self.bang_diem[j].get_sinh_vien().getTen()):
+                    self.bang_diem[i], self.bang_diem[j] = self.bang_diem[j], self.bang_diem[i]
+                elif self.bang_diem[i]._sinh_vien.getTen() == self.bang_diem[j]._sinh_vien.getTen():
+                    if self.bang_diem[i].get_so_diem() > self.bang_diem[j].get_so_diem():
+                        self.bang_diem[i], self.bang_diem[j] = self.bang_diem[j], self.bang_diem[i]
+        for i in self.bang_diem:
+            print(i)
+
 
     def sap_xep_giam(self):
-        diem = BangDiem.nhap()
-        self.bang_diem.append(diem)
+        for i in range(self.bang_diem.__len__()):
+            for j in range(i + 1, self.bang_diem.__len__()):
+                if (self.bang_diem[i].get_sinh_vien().getTen() < self.bang_diem[j].get_sinh_vien().getTen()):
+                    self.bang_diem[i], self.bang_diem[j] = self.bang_diem[j], self.bang_diem[i]
+                elif self.bang_diem[i]._sinh_vien.getTen() == self.bang_diem[j]._sinh_vien.getTen():
+                    if self.bang_diem[i].get_so_diem() < self.bang_diem[j].get_so_diem():
+                        self.bang_diem[i], self.bang_diem[j] = self.bang_diem[j], self.bang_diem[i]
+        for i in self.bang_diem:
+            print(i)
 
     def main(self):
         while (1 == 1):
@@ -130,11 +170,11 @@ class QLSV:
                 print("\nThem diem thanh cong!")
             elif (key == 6):
                 print("\n6. Sap xep bang diem tang dan theo ten, sau do den diem.")
-                self.them_diem()
+                self.sap_xep_tang()
                 print("\nSap xep tang dan thanh cong!")
             elif (key == 7):
                 print("\n7. Sap xep bang diem giam dan theo ten, sau do den diem.")
-                self.nhap_diem()
+                self.sap_xep_giam()
                 print("\nSap xep giam dan thanh cong!")
             elif (key == 0):
                 print("\nBan da chon thoat chuong trinh!")
