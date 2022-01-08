@@ -25,33 +25,6 @@ class QLSV:
         nguoi = Nguoi.nhap()
         ma_sv = input("Nhap ma sinh vien: ")
         lop = input("Nhap lop: ")
-        chuyen_nganh = input("Nhap chufrom BangDiem import BangDiem
-from GiaoVien import GiaoVien
-from LopHoc import LopHoc
-from MonHoc import MonHoc
-from Nguoi import Nguoi
-from SinhVien import SinhVien
-
-
-class QLSV:
-    ds_sv = []
-    ds_gv = []
-    ds_mon = []
-    ds_lop = []
-    bang_diem = []
-
-    def tim_sv(self, ma_sv):
-        result = None
-        if (self.ds_sv.__len__() > 0):
-            for sv in self.ds_sv:
-                if (sv.getMaSV() == ma_sv):
-                    result = sv
-        return result
-
-    def nhap_sv(self):
-        nguoi = Nguoi.nhap()
-        ma_sv = input("Nhap ma sinh vien: ")
-        lop = input("Nhap lop: ")
         chuyen_nganh = input("Nhap chuyen nganh: ")
         return SinhVien(nguoi.getTen(), nguoi.getGioiTinh(), nguoi.getTuoi(), nguoi.getDiaChi(),
                     ma_sv, lop, chuyen_nganh)
