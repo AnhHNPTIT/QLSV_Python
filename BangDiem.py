@@ -7,9 +7,12 @@ class BangDiem:
 
     def get_sinh_vien(self):
         return self._sinh_vien
+
+    def get_mon_hoc(self):
+        return self._mon_hoc
     
     def get_so_diem(self):
         return self._so_diem
     
     def __repr__(self) -> str:
-        return f"Ten sinh vien: {self._sinh_vien.getTen()} - Diem: {self._so_diem}"
+        return f"Ma sinh vien: {self._sinh_vien.get_ma()} - Ma mon hoc: {self._mon_hoc.get_ma()} - Diem: {self._so_diem}"

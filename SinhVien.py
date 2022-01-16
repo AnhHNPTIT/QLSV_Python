@@ -8,11 +8,14 @@ class SinhVien(Nguoi):
         self._lop = lop
         self._chuyen_nganh = chuyen_nganh
 
-    def getMaSV(self):
+    def get_ma(self):
         return self._ma_sv
 
-    def getLop(self):
+    def get_lop(self):
         return self._lop
 
-    def getChuyenNganh(self):
+    def get_chuyen_nganh(self):
         return self._chuyen_nganh
+
+    def __repr__(self) -> str:
+        return f"Ma sinh vien: {self._ma_sv} - Ten: {self._ten} - Lop: {self._lop} - Chuyen nganh: {self._chuyen_nganh}"

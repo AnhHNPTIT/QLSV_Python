@@ -6,16 +6,16 @@ class Nguoi:
         self._tuoi = tuoi
         self._dia_chi = dia_chi
 
-    def getTen(self):
+    def get_ten(self):
         return self._ten
 
-    def getDiaChi(self):
+    def get_dia_chi(self):
         return self._dia_chi
     
-    def getTuoi(self):
+    def get_tuoi(self):
         return self._tuoi
 
-    def getGioiTinh(self):
+    def get_gioi_tinh(self):
         return self._gioi_tinh
 
     @classmethod
