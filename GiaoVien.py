@@ -8,3 +8,6 @@ class GiaoVien(Nguoi):
         self._so_nam_kn = so_nam_kn
         self._chuyen_mon = chuyen_mon
         self._luong = luong
+
+    def get_ma(self):
+        return self._ma_gv

@@ -24,23 +24,33 @@ class QLSV:
     def nhap_sv(self):
         nguoi = Nguoi.nhap()
         ma_sv = input("Nhap ma sinh vien: ")
-        lop = input("Nhap lop: ")
         chuyen_nganh = input("Nhap chuyen nganh: ")
         return SinhVien(nguoi.get_ten(), nguoi.get_gioi_tinh(), nguoi.get_tuoi(), nguoi.get_dia_chi(),
-                    ma_sv, lop, chuyen_nganh)
+                    ma_sv, chuyen_nganh)
     
     def them_sv(self):
         sinh_vien = self.nhap_sv()
         self.ds_sv.append(sinh_vien)
 
-    def them_gv(self):
+    def tim_gv(self, ma_gv):
+        result = None
+        if (self.ds_gv.__len__() > 0):
+            for gv in self.ds_gv:
+                if (gv.get_ma() == ma_gv):
+                    result = gv
+        return result
+
+    def nhap_gv(self):
         nguoi = Nguoi.nhap()
         ma_gv = input("Nhap ma giao vien: ")
         so_nam_kn = input("Nhap so nam kinh nghiem: ")
         chuyen_mon = input("Nhap chuyen mon: ")
         luong = input("Nhap luong: ")
-        giao_vien = GiaoVien(nguoi.get_ten(), nguoi.get_gioi_tinh(), nguoi.get_tuoi(), nguoi.get_dia_chi(),
-                    ma_gv, so_nam_kn, chuyen_mon, luong)
+        return GiaoVien(nguoi.get_ten(), nguoi.get_gioi_tinh(), nguoi.get_tuoi(), nguoi.get_dia_chi(),
+                             ma_gv, so_nam_kn, chuyen_mon, luong)
+
+    def them_gv(self):
+        giao_vien = self.nhap_gv()
         self.ds_gv.append(giao_vien)
 
     def tim_mon(self, ma_mon):
@@ -51,36 +61,46 @@ class QLSV:
                     result = mon
         return result
 
-    def them_mon(self):
+    def nhap_mon(self):
         ma = input("Nhap ma mon hoc: ")
         ten = input("Nhap ten mon hoc: ")
         so_tin_chi = input("Nhap so tin chi: ")
-        mon_hoc = MonHoc(ma, ten, so_tin_chi)
+        return MonHoc(ma, ten, so_tin_chi)
+
+    def them_mon(self):
+        mon_hoc = self.nhap_mon()
         self.ds_mon.append(mon_hoc)
 
-    def them_lop(self):
+    def nhap_lop(self):
         ma = input("Nhap ma lop hoc: ")
         ten = input("Nhap ten lop hoc: ")
         so_sv = input("Nhap so sinh vien: ")
-        print("Nhap thong tin giao vien")
-        giao_vien = GiaoVien.nhap()
-        print("Nhap danh sach sinh vien")
+        ma_gv = input("Nhap ma giao vien: ")
+        giao_vien = self.tim_gv(ma_gv)
+        print("Nhap danh sach ma sinh vien ")
         ds_sv_lop = []
         for i in range(int(so_sv)):
-            sv = self.nhap_sv()
+            ma_sv = input("Nhap ma sinh vien: ")
+            sv = self.tim_sv(ma_sv)
             ds_sv_lop.append(sv)
-        print("NHAP MON HOC")
-        mon_hoc = MonHoc.nhap()
+        ma_mon = input("Nhap ma mon hoc: ")
+        mon_hoc = self.tim_mon(ma_mon)
         lop_hoc = LopHoc(ma, ten, so_sv, giao_vien, ds_sv_lop, mon_hoc)
+
+    def them_lop(self):
+        lop_hoc = self.nhap_lop()
         self.ds_lop.append(lop_hoc)
 
-    def them_diem(self):
+    def nhap_diem(self):
         ma_sv = input("Nhap ma sinh vien: ")
         ma_mon_hoc = input("Nhap ma mon hoc: ")
         sinh_vien = self.tim_sv(ma_sv)
         mon_hoc = self.tim_mon(ma_mon_hoc)
         so_diem = input("Nhap so diem: ")
-        diem = BangDiem(sinh_vien, mon_hoc, so_diem)
+        return BangDiem(sinh_vien, mon_hoc, so_diem)
+
+    def them_diem(self):
+        diem = self.nhap_diem()
         self.bang_diem.append(diem)
 
     def sap_xep_tang(self):
